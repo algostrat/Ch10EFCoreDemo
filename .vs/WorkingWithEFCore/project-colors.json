@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "e340c7fe-76c7-4c2b-a0f3-3431ad91d0ea": {
+      "ProjectGuid": "e340c7fe-76c7-4c2b-a0f3-3431ad91d0ea",
+      "DisplayName": "Ch10EFCoreDemo",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}
