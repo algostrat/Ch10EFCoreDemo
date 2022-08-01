@@ -9,7 +9,8 @@ Console.WriteLine("Hello, World!");
 Console.WriteLine($"Using {ProjectConstants.DatabaseProvider} database provider.");
 
 //QueryingCategories();
-FilteredIncludes();
+//FilteredIncludes();
+QueryingProducts();
 
 
 static void QueryingCategories()
@@ -47,6 +48,9 @@ static void FilteredIncludes()
             WriteLine("No categories found.");
             return;
         }
+
+        WriteLine($"ToQueryString: {categories.ToQueryString()}");
+
         foreach (Category c in categories)
         {
             Console.WriteLine($"{c.CategoryName} has {c.Products.Count} products with a minimum of { stock} units in stock.");
@@ -54,6 +58,36 @@ static void FilteredIncludes()
             {
                 Console.WriteLine($" {p.ProductName} has {p.Stock} units in stock.");
             }
+        }
+    }
+}
+
+static void QueryingProducts()
+{
+    using (Northwind db = new())
+    {
+        WriteLine("Products that cost more than a price, highest at top.");
+        string? input;
+        decimal price;
+        do
+        {
+            Write("Enter a product price: ");
+            input = ReadLine();
+        } while (!decimal.TryParse(input, out price));
+        IQueryable<Product>? products = db.Products?
+        .Where(product => product.Cost > price)
+        .OrderByDescending(product => product.Cost);
+        if (products is null)
+        {
+            WriteLine("No products found.");
+            return;
+        }
+
+        foreach (Product p in products)
+        {
+            WriteLine(
+            "{0}: {1} costs {2:$#,##0.00} and has {3} in stock.",
+            p.ProductId, p.ProductName, p.Cost, p.Stock);
         }
     }
 }
